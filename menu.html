@@ -48,7 +48,7 @@
     .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
     @media (max-width:900px){.grid-3{grid-template-columns:1fr 1fr}}
     @media (max-width:640px){.grid-3{grid-template-columns:1fr}}
-    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:transform .25s, box-shadow .25s}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:transform .25s, box-shadow .25s;cursor:pointer}
     .card:hover{transform:translateY(-6px);box-shadow:0 12px 35px rgba(0,0,0,.12)}
     .card img{width:100%;height:200px;object-fit:cover}
     .card .inner{padding:16px}
@@ -66,6 +66,75 @@
       nav ul.open{display:flex}
       nav a{padding:12px 10px;border-radius:10px}
       nav a:hover{background:rgba(255,255,255,.08)}
+    }
+
+    /* ===== MODAL STYLE ===== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+      z-index: 1000;
+    }
+    .modal.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-content {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      padding: 24px;
+      position: relative;
+      animation: pop .3s ease;
+    }
+    .modal-content img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+    }
+    .modal-content h3 {
+      margin-bottom: 8px;
+      color: var(--coffee-dark);
+    }
+    .modal-content p {
+      color: var(--muted);
+    }
+    .modal-content .price {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--coffee);
+      margin: 8px 0 16px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      background: var(--coffee);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .close-btn:hover {
+      background: var(--coffee-dark);
+    }
+    @keyframes pop {
+      from {transform: scale(.9); opacity: 0;}
+      to {transform: scale(1); opacity: 1;}
     }
   </style>
 </head>
@@ -100,22 +169,80 @@
       <p class="lead">Pilihan minuman dan makanan terbaik untuk Anda.</p>
 
       <div class="grid grid-3">
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=60" alt="Cappuccino dengan taburan bubuk cokelat">
+        <article class="card" data-name="Cappuccino" data-price="Rp 25.000" data-desc="Perpaduan espresso, susu, dan busa lembut dengan aroma menggoda.">
+          <img src="https://www.nescafe.com/id/sites/default/files/2023-08/Sama-sama-Berbahan-Dasar-Susu%2C-Apa-Perbedaan-Cappuccino-dan-Latte_hero.jpg" alt="Cappuccino dengan taburan bubuk cokelat">
           <div class="inner">
             <h3>Cappuccino</h3>
             <p>Espresso dengan busa susu lembut.</p>
           </div>
         </article>
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=60" alt="Latte hangat dengan latte art">
+
+        <article class="card" data-name="Ocean Blue" data-price="Rp 28.000" data-desc="Minuman berwarna biru laut dengan kesegaran citrus dan mint, menciptakan sensasi tropis yang menenangkan.">
+          <img src="https://wiratech.co.id/wp-content/uploads/2025/09/Blue-Ocean-Drink.png" alt="Ocean Blue drink">
+          <div class="inner">
+            <h3>Ocean Blue</h3>
+            <p>Minuman segar bernuansa tropis dengan aroma citrus dan mint.</p>
+          </div>
+        </article>
+
+        <article class="card" data-name="Strawberry Milkshake" data-price="Rp 30.000" data-desc="Kelezatan susu dingin berpadu stroberi segar dan krim lembut manis, creamy, dan memanjakan lidah.">
+          <img src="https://www.butteredsideupblog.com/wp-content/uploads/2023/06/How-to-Make-a-Strawberry-Milkshake-Without-Ice-Cream-17-scaled.jpg" alt="Strawberry milkshake pink dengan whipped cream">
+          <div class="inner">
+            <h3>Strawberry Milkshake</h3>
+            <p>Perpaduan susu dingin dan stroberi segar yang creamy.</p>
+          </div>
+        </article>
+
+         <article class="card" data-name="Maccha Latte" data-price="Rp 32.000" data-desc="Kelembutan susu berpadu bubuk matcha premium Jepang yang earthy, memberi ketenangan di setiap tegukan.">
+          <img src="https://www.foodandwine.com/thmb/2tI8aL1Z8hKhfV48_c8b6uWG-TQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Iced-Matcha-Latte-FT-RECIPE0622-2000-9c2e116d3bc54bdaacda10e62e8e0205.jpg" alt="Maccha latte dengan foam hijau lembut">
+          <div class="inner">
+            <h3>Maccha Latte</h3>
+            <p>Matcha premium berpadu susu lembut yang menenangkan.</p>
+          </div>
+        </article>
+
+           <article class="card" data-name="Churros" data-price="Rp 22.000" data-desc="Camilan khas Spanyol dengan tekstur renyah di luar, lembut di dalam, disajikan dengan saus cokelat hangat.">
+          <img src="https://www.frisianflag.com/storage/app/media/uploaded-files/churros-saus-coklatkeju.jpg" alt="Churros dengan saus cokelat">
+          <div class="inner">
+            <h3>Churros</h3>
+            <p>Churros hangat disajikan dengan saus cokelat manis.</p>
+          </div>
+        </article>
+
+          <article class="card" data-name="Nasi Goreng Spesial" data-price="Rp 35.000" data-desc="Nasi goreng khas NewLoka dengan telur mata sapi, ayam suwir, dan aroma rempah autentik yang menggugah selera.">
+          <img src="https://asset.kompas.com/crops/VcgvggZKE2VHqIAUp1pyHFXXYCs=/202x66:1000x599/1200x800/data/photo/2023/05/07/6456a450d2edd.jpg" alt="Nasi goreng spesial dengan telur">
+          <div class="inner">
+            <h3>Nasi Goreng Spesial</h3>
+            <p>Nasi goreng istimewa dengan ayam suwir dan telur mata sapi.</p>
+          </div>
+        </article>
+
+          <article class="card" data-name="Cake Slice" data-price="Rp 26.000" data-desc="Potongan kue lembut dengan lapisan krim halus dan aroma vanilla yang menggoda — manis dalam kesederhanaan.">
+          <img src="https://www.shutterstock.com/image-photo/decadent-indulgent-chocolate-cake-slice-600nw-2680283705.jpg" alt="Potongan cake slice dengan krim putih">
+          <div class="inner">
+            <h3>Cake Slice</h3>
+            <p>Kue lembut dengan lapisan krim manis dan aroma vanilla.</p>
+          </div>
+        </article>
+
+        <article class="card" data-name="Waffle" data-price="Rp 20.000" data-desc="Waffle lembut beraroma manis menggoda, disajikan dengan ice cream creamy.">
+          <img src="https://www.gotravelly.com/blog/wp-content/uploads/2020/07/brown-fox-waffle-coffee.jpg" alt="Waffle dengan ice cream creamy">
+          <div class="inner">
+            <h3>Waffle</h3>
+            <p>Waffle lembut dengan aroma manis menggoda, dipanggang hingga keemasan sempurna.</p>
+          </div>
+        </article>
+
+        <article class="card" data-name="Latte" data-price="Rp 27.000" data-desc="Espresso berpadu susu panas creamy dengan sentuhan latte art elegan.">
+          <img src="https://www.bitkaorigin.com/assets/myback/js/elFinder/files/bitka-serba-serbi-latte-art-yang-wajib-pecinta-kopi-ketahui-foto1.jpg" alt="Latte hangat dengan latte art">
           <div class="inner">
             <h3>Latte</h3>
             <p>Espresso dengan susu panas creamy.</p>
           </div>
         </article>
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?auto=format&fit=crop&w=800&q=60" alt="Croissant renyah berlapis">
+
+        <article class="card" data-name="Croissant" data-price="Rp 18.000" data-desc="Pastry renyah berlapis dengan rasa gurih mentega, cocok untuk teman kopi pagi.">
+          <img src="https://arengaindonesia.com/wp-content/uploads/2023/08/Croissant-dan-kopi-pasangan-serasi-untuk-mencerahkan-hari.jpg" alt="Croissant renyah berlapis">
           <div class="inner">
             <h3>Croissant</h3>
             <p>Pastry renyah dengan rasa gurih mentega.</p>
@@ -130,11 +257,22 @@
     <div class="container wrap">© 2025 NewLoka Coffee. All rights reserved.</div>
   </footer>
 
+  <!-- MODAL DETAIL -->
+  <div class="modal" id="menuModal">
+    <div class="modal-content">
+      <button class="close-btn">×</button>
+      <img src="" alt="Gambar Menu" id="modalImage">
+      <h3 id="modalName">Nama Menu</h3>
+      <div class="price" id="modalPrice"></div>
+      <p id="modalDesc"></p>
+    </div>
+  </div>
+
   <!-- ====== SCRIPT INLINE ====== -->
   <script>
+    // === NAVBAR TOGGLE ===
     const toggle = document.querySelector('.menu-toggle');
     const list   = document.querySelector('nav ul');
-
     if (toggle && list) {
       toggle.addEventListener('click', () => {
         const isOpen = list.classList.toggle('open');
@@ -148,6 +286,7 @@
       });
     }
 
+    // === ACTIVE LINK ===
     const currentPage = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
     document.querySelectorAll('nav a').forEach(link => {
       const href = (link.getAttribute('href') || '').toLowerCase();
@@ -155,6 +294,33 @@
       if ((currentPage === '' || currentPage === '/') && href.includes('index')) {
         link.classList.add('active');
       }
+    });
+
+    // === MODAL FUNCTIONALITY ===
+    const cards = document.querySelectorAll('.card');
+    const modal = document.getElementById('menuModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalName = document.getElementById('modalName');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDesc = document.getElementById('modalDesc');
+    const closeBtn = document.querySelector('.close-btn');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        modalImg.src = card.querySelector('img').src;
+        modalName.textContent = card.dataset.name;
+        modalPrice.textContent = card.dataset.price;
+        modalDesc.textContent = card.dataset.desc;
+        modal.classList.add('open');
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('open');
+    });
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.classList.remove('open');
     });
   </script>
 </body>
