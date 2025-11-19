@@ -1,51 +1,73 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NewLoka Coffee — Tentang Kami</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NewLoka Coffee — Tentang Kami Premium</title>
 
-  <!-- ====== STYLE INLINE ====== -->
   <style>
     :root{
       --coffee:#5e382a;
       --coffee-dark:#4a2f24;
       --cream:#f7f5f2;
-      --card:#ffffff;
+      --card:#ffffff20; /* glass effect */
       --accent:#ffd700;
       --text:#2d2a26;
       --muted:#6b6b6b;
-      --radius:18px;
+      --radius:20px;
       --shadow:0 10px 30px rgba(0,0,0,.08);
     }
+
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text);background:var(--cream);line-height:1.65}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text);background:var(--cream);line-height:1.65;overflow-x:hidden}
     .container{width:min(1100px,92%);margin-inline:auto}
-    a{text-decoration:none;color:inherit}
+    a{text-decoration:none;color:inherit;transition:.3s}
 
     /* NAVBAR */
     header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--coffee),var(--coffee-dark));color:#fff;box-shadow:var(--shadow)}
     nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0}
-    .brand{font-weight:800}
+    .brand{font-weight:800; font-size:1.5rem; letter-spacing:1px}
     nav ul{list-style:none;display:flex;gap:18px;align-items:center}
-    nav a{color:#fff;opacity:.95;padding:10px 6px;border-radius:10px;transition:.2s}
+    nav a{color:#fff;opacity:.95;padding:10px 6px;border-radius:10px;transition:.3s}
     nav a:hover{opacity:1;color:var(--accent)}
     nav a.active{color:var(--accent);font-weight:700;border-bottom:2px solid var(--accent)}
-    .menu-toggle{display:none;background:#fff;color:var(--coffee);border:none;padding:8px 12px;border-radius:12px}
+    .menu-toggle{display:none;background:#fff;color:var(--coffee);border:none;padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:700}
 
-    /* HERO */
-    .hero{min-height:50vh;display:grid;place-items:center;text-align:center;color:#fff;position:relative;isolation:isolate}
-    .hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:-1}
-    .hero h1{font-size:clamp(28px,4vw,42px);font-weight:800}
+    /* HERO HD */
+    .hero{min-height:60vh;display:grid;place-items:center;text-align:center;color:#fff;position:relative;overflow:hidden;perspective:800px;}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.2),rgba(0,0,0,.7));z-index:1}
+    .hero h1{position:relative;z-index:2;font-size:clamp(36px,6vw,56px);font-weight:900;text-shadow:0 6px 25px rgba(0,0,0,.6);transition:0.3s;}
+    .light-overlay{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at center, rgba(255,215,0,0.15), transparent 60%);animation:lightMove 12s infinite alternate; z-index:1;}
+    @keyframes lightMove{0%{transform:translate(0,0);}100%{transform:translate(60px,60px);}}
 
     /* SECTION */
-    section{padding:72px 0}
-    .section-title{text-align:center;font-size:clamp(22px,3vw,30px);margin-bottom:26px;font-weight:800;}
-    .lead{text-align:center;color:var(--muted);margin:-12px 0 32px}
+    section{padding:80px 0;position:relative}
+    .section-title{text-align:center;font-size:clamp(26px,3vw,34px);margin-bottom:20px;font-weight:800;position:relative;}
+    .section-title::after{content:"";width:70px;height:4px;background:var(--accent);display:block;margin:12px auto 0;border-radius:2}
+    .lead{text-align:center;color:var(--muted);margin:-6px 0 40px;font-size:1rem}
 
-    /* CONTENT */
-    .about{max-width:800px;margin-inline:auto;text-align:center}
-    .about p{margin-bottom:18px;color:var(--muted)}
+    /* ABOUT CARDS */
+    .about{max-width:800px;margin-inline:auto;text-align:center;display:grid;gap:30px}
+    .about p.card{
+      background:var(--card);
+      backdrop-filter:blur(12px);
+      border-radius:var(--radius);
+      padding:28px 24px;
+      box-shadow:0 15px 40px rgba(0,0,0,0.15);
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+      cursor:pointer;
+      opacity:0;
+      transform:translateY(30px);
+    }
+    .about p.card:hover{
+      transform:translateY(-5px) scale(1.02);
+      box-shadow:0 25px 50px rgba(0,0,0,0.25);
+    }
+    .about p.card.visible{
+      opacity:1;
+      transform:translateY(0);
+      transition:opacity 0.6s ease, transform 0.6s ease;
+    }
 
     /* FOOTER */
     footer{background:var(--coffee);color:#fff;margin-top:60px}
@@ -80,6 +102,7 @@
 
   <!-- HERO -->
   <section class="hero" style="background:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=60') center/cover no-repeat;">
+    <div class="light-overlay"></div>
     <div class="container">
       <h1>Tentang NewLoka</h1>
     </div>
@@ -91,9 +114,11 @@
       <h2 class="section-title">Cerita Kami</h2>
       <p class="lead">NewLoka Coffee hadir untuk membawa kehangatan dan rasa kebersamaan dalam setiap cangkir.</p>
 
-      <p>Berawal dari kecintaan kami pada kopi, NewLoka didirikan dengan visi untuk memperkenalkan cita rasa kopi berkualitas tinggi kepada semua orang. Kami percaya bahwa secangkir kopi bukan hanya minuman, tapi juga pengalaman.</p>
-      <p>Biji kopi kami dipilih dari petani lokal maupun internasional, dipanggang dengan teknik terbaik, lalu disajikan oleh barista berpengalaman yang selalu menuangkan hati dalam setiap sajian.</p>
-      <p>Selain menghadirkan kopi terbaik, kami juga menciptakan suasana yang nyaman — tempat di mana Anda bisa berbincang, bekerja, atau sekadar menikmati waktu untuk diri sendiri.</p>
+      <p class="card">Berawal dari kecintaan kami pada kopi, NewLoka didirikan dengan visi untuk memperkenalkan cita rasa kopi berkualitas tinggi kepada semua orang. Kami percaya bahwa secangkir kopi bukan hanya minuman, tapi juga pengalaman.</p>
+
+      <p class="card">Biji kopi kami dipilih dari petani lokal maupun internasional, dipanggang dengan teknik terbaik, lalu disajikan oleh barista berpengalaman yang selalu menuangkan hati dalam setiap sajian.</p>
+
+      <p class="card">Selain menghadirkan kopi terbaik, kami juga menciptakan suasana yang nyaman tempat di mana Anda bisa berbincang, bekerja, atau sekadar menikmati waktu untuk diri sendiri.</p>
     </div>
   </section>
 
@@ -102,11 +127,10 @@
     <div class="container wrap">© 2025 NewLoka Coffee</div>
   </footer>
 
-  <!-- ====== SCRIPT INLINE ====== -->
   <script>
+    // MOBILE NAV
     const toggle = document.querySelector('.menu-toggle');
     const list   = document.querySelector('nav ul');
-
     if (toggle && list) {
       toggle.addEventListener('click', () => {
         const isOpen = list.classList.toggle('open');
@@ -120,6 +144,7 @@
       });
     }
 
+    // ACTIVE LINK
     const currentPage = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
     document.querySelectorAll('nav a').forEach(link => {
       const href = (link.getAttribute('href') || '').toLowerCase();
@@ -128,6 +153,17 @@
         link.classList.add('active');
       }
     });
+
+    // FADE-UP ON SCROLL FOR ABOUT CARDS
+    const cards = document.querySelectorAll('.about .card');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {threshold:0.2});
+    cards.forEach(card => observer.observe(card));
   </script>
 </body>
 </html>
