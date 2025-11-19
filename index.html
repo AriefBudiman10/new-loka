@@ -4,196 +4,73 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NewLoka Coffee — Home</title>
-
-  <!-- ====== STYLE INLINE ====== -->
-  <style>
-    :root{
-      --coffee:#5e382a;
-      --coffee-dark:#4a2f24;
-      --cream:#f7f5f2;
-      --card:#ffffff;
-      --accent:#ffd700;
-      --text:#2d2a26;
-      --muted:#6b6b6b;
-      --radius:18px;
-      --shadow:0 10px 30px rgba(0,0,0,.08);
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-      color:var(--text);
-      background:var(--cream);
-      line-height:1.65;
-    }
-    img{max-width:100%;display:block}
-    a{text-decoration:none;color:inherit}
-    .container{width:min(1100px,92%);margin-inline:auto}
-
-    /* NAVBAR */
-    header{
-      position:sticky;top:0;z-index:50;
-      background:linear-gradient(180deg,var(--coffee),var(--coffee-dark));
-      color:#fff;box-shadow:var(--shadow);
-    }
-    nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0}
-    .brand{font-weight:800;letter-spacing:.3px}
-    nav ul{list-style:none;display:flex;gap:18px;align-items:center}
-    nav a{color:#fff;opacity:.95;padding:10px 6px;border-radius:10px;transition:.2s}
-    nav a:hover{opacity:1;color:var(--accent)}
-    nav a.active{color:var(--accent);font-weight:700;border-bottom:2px solid var(--accent)}
-    .menu-toggle{display:none;background:#fff;color:var(--coffee);border:none;padding:8px 12px;border-radius:12px}
-
-    /* HERO */
-    .hero{
-      min-height:70vh;display:grid;place-items:center;text-align:center;
-      color:#fff;position:relative;isolation:isolate;
-    }
-    .hero::after{
-      content:"";position:absolute;inset:0;
-      background:linear-gradient(to bottom,rgba(0,0,0,.45),rgba(0,0,0,.55));
-      z-index:-1;
-    }
-    .hero .inner{padding:80px 0}
-    .hero h1{font-size:clamp(28px,4vw,44px);font-weight:800;margin-bottom:12px}
-    .hero p{opacity:.95;max-width:700px;margin:0 auto 22px}
-    .btn{
-      display:inline-block;background:#fff;color:var(--coffee);
-      padding:12px 22px;border-radius:999px;font-weight:700;transition:.25s;
-      box-shadow:var(--shadow)
-    }
-    .btn:hover{background:var(--coffee);color:#fff;transform:translateY(-2px)}
-
-    /* SECTION */
-    section{padding:72px 0}
-    .section-title{text-align:center;font-size:clamp(22px,3vw,30px);margin-bottom:26px;font-weight:800;}
-    .lead{color:var(--muted);text-align:center;margin:-12px 0 32px}
-
-    /* CARDS */
-    .grid{display:grid;gap:22px}
-    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media (max-width:900px){.grid-3{grid-template-columns:1fr 1fr}}
-    @media (max-width:640px){.grid-3{grid-template-columns:1fr}}
-    .card{
-      background:var(--card);border-radius:var(--radius);padding:22px;
-      box-shadow:var(--shadow);text-align:center;
-    }
-    .card h3{margin:8px 0 6px}
-    .card p{color:var(--muted)}
-
-    /* FOOTER */
-    footer{background:var(--coffee);color:#fff;margin-top:60px}
-    footer .wrap{display:flex;align-items:center;justify-content:center;padding:18px 0}
-
-    /* MOBILE NAV */
-    @media (max-width:820px){
-      .menu-toggle{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:12px;border:none;background:#fff;color:var(--coffee);font-weight:700;}
-      nav ul{
-        position:fixed;top:64px;right:16px;left:16px;
-        background:linear-gradient(180deg,var(--coffee),var(--coffee-dark));
-        border-radius:16px;padding:10px;
-        flex-direction:column;gap:4px;
-        display:none;box-shadow:var(--shadow);
-      }
-      nav ul.open{display:flex}
-      nav a{padding:12px 10px;border-radius:10px}
-      nav a:hover{background:rgba(255,255,255,.08)}
-      .hero{min-height:56vh}
-    }
-    @media (max-width:480px){
-      .hero h1{font-size:28px}
-      .btn{padding:10px 18px}
-      section{padding:56px 0}
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- NAV -->
+
+  <!-- NAVBAR -->
   <header>
-    <div class="container">
-      <nav>
-        <a class="brand" href="index.html">NewLoka</a>
-        <button class="menu-toggle" aria-expanded="false">Menu</button>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="menu.html">Menu</a></li>
-          <li><a href="layanan.html">Layanan</a></li>
-          <li><a href="tentang.html">Tentang</a></li>
-          <li><a href="kontak.html">Kontak</a></li> <!-- ✅ Tambahkan ini -->
-        </ul>
-      </nav>
-    </div>
+    <nav class="container">
+      <a class="brand holo-3d" data-text="NewLoka" href="index.html">NewLoka</a>
+      <button class="menu-toggle">Menu</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="layanan.html">Layanan</a></li>
+        <li><a href="tentang.html">Tentang</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
+      </ul>
+    </nav>
   </header>
 
   <!-- HERO -->
-  <section class="hero" style="
-    background:
-      linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.55)),
-      url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=60')
-      center/cover no-repeat;">
-    <div class="container inner">
-      <h1>Nikmati Secangkir Kebahagiaan di NewLoka</h1>
+  <section class="hero">
+    <div class="inner">
+      <h1 class="holo-3d" data-text="Nikmati Secangkir Kebahagiaan di NewLoka">
+        Nikmati Secangkir Kebahagiaan di NewLoka
+      </h1>
       <p>Kopi terbaik, barista profesional, dan suasana nyaman menanti Anda.</p>
-      <a class="btn" href="menu.html">Lihat Menu</a>
+      <a class="btn holo-3d" data-text="Lihat Menu" href="menu.html">Lihat Menu</a>
     </div>
   </section>
 
   <!-- FITUR -->
-  <section>
-    <div class="container">
-      <h2 class="section-title">Apa Yang Kami Tawarkan</h2>
-      <p class="lead">Tiga alasan kenapa banyak orang memilih NewLoka.</p>
+  <section id="features">
+    <h2 class="section-title holo-3d" data-text="Apa Yang Kami Tawarkan">
+      Apa Yang Kami Tawarkan
+    </h2>
+    <p class="lead">Tiga alasan kenapa banyak orang memilih NewLoka.</p>
 
-      <div class="grid grid-3">
-        <article class="card">
-          <h3>Kopi Berkualitas Tinggi</h3>
-          <p>Biji kopi Arabica pilihan dari kebun lokal & internasional.</p>
-        </article>
-        <article class="card">
-          <h3>Barista Profesional</h3>
-          <p>Setiap cangkir diracik dengan hati oleh barista berpengalaman.</p>
-        </article>
-        <article class="card">
-          <h3>Lingkungan Nyaman</h3>
-          <p>Interior modern bernuansa alami untuk santai ataupun kerja.</p>
-        </article>
-      </div>
+    <div class="grid grid-3">
+      <article class="card holo-3d clickable" data-text="Kopi Berkualitas Tinggi" data-link="menu.html#kopi">
+        <h3>Kopi Berkualitas Tinggi</h3>
+        <p>Biji kopi Arabica pilihan dari kebun lokal & internasional.</p>
+      </article>
+      <article class="card holo-3d clickable" data-text="Barista Profesional" data-link="layanan.html#barista">
+        <h3>Barista Profesional</h3>
+        <p>Setiap cangkir diracik dengan hati oleh barista berpengalaman.</p>
+      </article>
+      <article class="card holo-3d clickable" data-text="Lingkungan Nyaman" data-link="tentang.html#lingkungan">
+        <h3>Lingkungan Nyaman</h3>
+        <p>Interior modern bernuansa alami untuk santai ataupun kerja.</p>
+      </article>
     </div>
   </section>
+  
 
   <!-- FOOTER -->
-  <footer>
-    <div class="container wrap">© 2025 NewLoka Coffee</div>
-  </footer>
+  <footer>© 2025 NewLoka Coffee</footer>
 
-  <!-- ====== SCRIPT INLINE ====== -->
   <script>
-    // Toggle menu mobile + aria
     const toggle = document.querySelector('.menu-toggle');
-    const list   = document.querySelector('nav ul');
+    const list = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => list.classList.toggle('open'));
 
-    if (toggle && list) {
-      toggle.addEventListener('click', () => {
-        const isOpen = list.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', isOpen);
+    document.querySelectorAll('.card.clickable').forEach(card => {
+      card.addEventListener('click', () => {
+        const link = card.dataset.link;
+        if(link) window.location.href = link;
       });
-
-      list.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          list.classList.remove('open');
-          toggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
-
-    // Tandai link aktif
-    const currentPage = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    document.querySelectorAll('nav a').forEach(link => {
-      const href = (link.getAttribute('href') || '').toLowerCase();
-      if (href === currentPage) link.classList.add('active');
-      if ((currentPage === '' || currentPage === '/') && href.includes('index')) {
-        link.classList.add('active');
-      }
     });
   </script>
 </body>
